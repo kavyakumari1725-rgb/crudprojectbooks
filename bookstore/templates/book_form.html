@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Add / Edit Book{% endblock %}
+{% block content %}
+
+<div class="card shadow p-4">
+    <h3 class="mb-3">Add or Edit Book</h3>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mt-3">Save</button>
+        <a href="{% url 'book_list' %}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

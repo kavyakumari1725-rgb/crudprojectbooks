@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Book List{% endblock %}
+{% block content %}
+
+<h2 class="mb-4 text-center">All Books</h2>
+
+{% if books %}
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Published Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.description|truncatechars:50 }}</td>
+            <td>{{ book.published_date }}</td>
+            <td>
+                <a href="{% url 'book_update' book.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'book_delete' book.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p class="text-center text-muted">No books available. <a href="{% url 'book_create' %}">Add one now!</a></p>
+{% endif %}
+
+{% endblock %}
